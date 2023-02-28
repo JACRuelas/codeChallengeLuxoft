@@ -19,8 +19,11 @@ internal class CharacterRepositoryImplTest {
     @Test
     fun `getCharacterSeries should call service_getCharacterSeries`() = runBlocking {
         //  TODO: Complete this test
-        coEvery { characterService.getCharacterSeries(any(), any(), any()) }.returns(mockk())
-        coVerify { }
+        coEvery { characterService.getCharacterSeries(any(), any(), any()) }.returns(mockk {
+            every { isSuccessful }.returns(true)
+        })
+        sut.getCharacterSeries(1005, PaginationKey(1, 1))
+        coVerify (exactly = 1) { characterService.getCharacterSeries(1005, 1, 1) }
     }
 
 

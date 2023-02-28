@@ -52,4 +52,15 @@ class CharacterRepositoryImpl @Inject constructor(private val service: Character
             offset = key.offset
         )
     }
+
+    override suspend fun getCharacterStories(
+        characterId: Int,
+        key: PaginationKey
+    ): Response<CharacterStoriesDataWrapper> {
+        return service.getCharacterStories(
+            characterId = characterId,
+            limit = key.limit,
+            offset = key.offset
+        )
+    }
 }
